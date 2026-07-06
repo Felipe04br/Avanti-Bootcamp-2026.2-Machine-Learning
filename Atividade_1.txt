@@ -1,0 +1,72 @@
+---
+
+1. O que é machine learning?
+
+Machine learning (ou aprendizado de máquina) é um ramo da inteligência artificial que dá aos computadores a capacidade de aprender e tomar decisões a partir de dados, sem que sejam explicitamente programados para cada tarefa. 
+
+Em vez de escrever um conjunto fixo de regras ("se X acontecer, faça Y"), nós fornecemos ao algoritmo uma grande quantidade de exemplos (dados históricos) e deixamos que ele mesmo descubra os padrões, relações e estatísticas escondidas nesses dados. Conforme o modelo é exposto a mais informações, ele ajusta internamente seus parâmetros para melhorar seu desempenho. Na prática, é como ensinar uma criança a reconhecer gatos: mostramos várias fotos de gatos e não-gatos, e ela vai aprendendo as características (pelos, orelhas, focinho) sozinha, sem que a gente defina uma regra rígida sobre o que é um gato.
+
+---
+
+2. Explique o conceito de conjunto de treinamento, validação e teste.
+
+Para garantir que um modelo de machine learning funcione bem no mundo real (e não apenas "decore" os dados que viu), dividimos os dados disponíveis em três partes:
+
+- Conjunto de treinamento (geralmente ~70% dos dados): É a "matéria-prima" onde o modelo realmente aprende. Ele analisa esses dados repetidamente, ajustando seus pesos internos para minimizar o erro entre suas previsões e os valores reais. É aqui que ocorre o "estudo" propriamente dito.
+
+- Conjunto de validação (geralmente ~15%): Funciona como uma "prova simulada" durante o treinamento. Usamos esse conjunto para ajustar os hiperparâmetros (configurações do algoritmo, como a taxa de aprendizado ou a profundidade de uma árvore) e para decidir quando parar o treinamento (evitando que o modelo decore os dados). Ele nos dá um feedback contínuo sobre se o modelo está generalizando bem ou já está superajustado (overfitting).
+
+- Conjunto de teste (geralmente ~15%): É a "prova final" – um conjunto de dados que o modelo nunca viu durante todo o processo de desenvolvimento. Só usamos ele uma única vez, no final, para medir a performance real e definitiva do modelo. Se o modelo for bem aqui, temos confiança de que ele terá um bom desempenho em situações novas e imprevisíveis.
+
+---
+
+3. Como você lidaria com dados ausentes em um conjunto de treinamento?
+
+A estratégia depende do contexto, da quantidade de dados faltantes e do tipo de algoritmo que vou usar. Eu adotaria uma abordagem em etapas:
+
+1. Análise exploratória: Primeiro, identificaria *por que* os dados estão faltando (se é aleatório, se depende de outra variável, ou se é por falha no sistema). Isso é crucial, pois uma imputação errada pode enviesar o modelo.
+
+2. Remoção (caso extremo): Se uma coluna tiver mais de 50% ou 60% de valores ausentes, provavelmente a descartaria, pois ela não trará informação útil. Se forem poucas linhas com dados faltantes, posso simplesmente excluir essas linhas (especialmente se o volume total de dados for grande).
+
+3. Imputação (preenchimento): Para colunas com poucos dados faltantes, preencheria os valores:
+   - Variáveis numéricas: usaria a média, a mediana (mais robusta para dados com outliers) ou, se houver correlação, faria uma imputação por regressão ou usando o algoritmo KNN (vizinhos mais próximos) para estimar o valor com base em outras características.
+   - Variáveis categóricas: usaria a moda (valor mais frequente) ou criaria uma nova categoria chamada "Desconhecido" ou "Ausente", o que muitas vezes é útil, pois a ausência em si pode ser um padrão relevante.
+
+4. Algoritmos robustos: Se o tempo for curto, posso optar por algoritmos como XGBoost ou LightGBM, que já lidam bem internamente com valores nulos, encontrando o melhor caminho para desviar deles durante o treinamento.
+
+Por fim, sempre validaria a qualidade da imputação comparando a distribuição dos dados imputados com os dados originais, para garantir que não introduzi distorções.
+
+---
+
+4. O que é uma matriz de confusão e como ela é usada?
+
+A matriz de confusão é uma tabela que cruza as previsões feitas pelo modelo com os valores reais, permitindo enxergar não apenas quantos erros o modelo cometeu, mas quais tipos de erros. Para um problema de "sim/não", ela tem quatro quadrantes:
+
+- Verdadeiros Positivos (VP): Previmos "sim" e era "sim".
+- Verdadeiros Negativos (VN): Previmos "não" e era "não".
+- Falsos Positivos (FP): Previmos "sim", mas era "não" (erro tipo I).
+- Falsos Negativos (FN): Previmos "não", mas era "sim" (erro tipo II).
+
+Ela é a base para calcular várias métricas de desempenho:
+
+- Acurácia = (VP+VN) / Total – útil quando as classes são balanceadas.
+- Precisão = VP / (VP+FP) – mede o quanto o modelo é confiável quando diz "sim" (importante em spam, por exemplo, para não marcar e-mails importantes como lixo).
+- Sensibilidade = VP / (VP+FN) – mede o quanto o modelo captura dos "sim" verdadeiros (crucial em diagnósticos médicos, onde não se pode deixar um doente passar).
+
+Olhando para a matriz, consigo diagnosticar se o modelo está enviesado para uma classe, ou se o custo do erro é maior para um lado do que para o outro, e ajustar o limiar de decisão ou rebalancear os dados.
+
+---
+
+5. Em quais áreas você acha mais interessante aplicar algoritmos de machine learning?
+
+Vejo potencial transformador em diversas áreas, mas as que considero mais fascinantes e com grande impacto prático são:
+
+- Saúde: É a área que mais me atrai. Desde a detecção precoce de tumores em exames de imagem (com visão computacional) até a previsão de readmissão hospitalar de pacientes com base em prontuários eletrônicos. O ML pode salvar vidas ao identificar padrões sutis que o olho humano não percebe, além de acelerar a descoberta de novos medicamentos.
+
+- Agricultura: O uso de ML para agricultura de precisão é espetacular. Algoritmos que combinam dados de satélite, sensores de solo e clima podem prever a melhor época para plantar, irrigar ou colher, além de detectar pragas e doenças nas plantações por meio de imagens de drones. Isso aumenta a produtividade e reduz o desperdício de recursos como água e defensivos.
+
+- Manufatura e Indústria 4.0: Em vez de fazer manutenções programadas (que param a fábrica), sensores nas máquinas enviam dados em tempo real (vibração, temperatura, ruído) e o modelo prevê quando uma peça vai falhar, permitindo a troca apenas no momento certo. Além disso, o controle de qualidade com visão computacional inspeciona produtos em alta velocidade, detectando defeitos minúsculos.
+
+- Construção Civil: Acredito que o ML pode revolucionar a gestão de obras. Modelos podem prever atrasos com base no clima, na produtividade da equipe e na entrega de insumos. Também há aplicações em segurança: análises de imagens de canteiros de obras para detectar se os trabalhadores estão usando equipamentos de proteção adequados, prevenindo acidentes.
+
+- Sustentabilidade e Energia: Prever a geração de energia solar e eólica com base em padrões climáticos, otimizando a integração dessas fontes na rede elétrica, é um desafio lindo e essencial para a transição energética.
