@@ -24,7 +24,7 @@ Para garantir que um modelo de machine learning funcione bem no mundo real (e n�
 
 A estratégia depende do contexto, da quantidade de dados faltantes e do tipo de algoritmo que vou usar. Eu adotaria uma abordagem em etapas:
 
-1. Análise exploratória: Primeiro, identificaria *por que* os dados estão faltando (se é aleatório, se depende de outra variável, ou se é por falha no sistema). Isso é crucial, pois uma imputação errada pode enviesar o modelo.
+1. Análise exploratória: Primeiro, identificaria por que os dados estão faltando (se é aleatório, se depende de outra variável, ou se é por falha no sistema). Isso é crucial, pois uma imputação errada pode enviesar o modelo.
 
 2. Remoção (caso extremo): Se uma coluna tiver mais de 50% ou 60% de valores ausentes, provavelmente a descartaria, pois ela não trará informação útil. Se forem poucas linhas com dados faltantes, posso simplesmente excluir essas linhas (especialmente se o volume total de dados for grande).
 

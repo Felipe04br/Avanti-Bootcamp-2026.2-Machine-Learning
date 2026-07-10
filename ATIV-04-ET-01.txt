@@ -1,0 +1,57 @@
+﻿ATIV-04-ET-01 (Rascunho)
+
+■ Verifique se todas as imagens listadas no arquivo de informações
+realmente existem no diretório de imagens e vice-versa.
+
+x
+
+■ Verifique se todas as imagens estão no mesmo formato:
+
+Imagens em JPG e segmentações em PNG.
+
+○ Consistência dos Metadados
+■ Verifique se há valores ausentes nos metadados e como esses casos
+são tratados.
+
+Algumas arquivos a menos que o que consta nas informações:
+Normal: Faltam 0 arquivos
+Germ Cell Tumors: Faltam 6 arquivos
+Embryonic Tumors: Faltam 6 arquivos
+Nerve Sheath Tumors: Faltam 30 arquivos
+Meningothelial Tumors: Faltam 183 arquivos
+Gliomas: Faltam 256 arquivos
+Mixed Neuronal and Neuronal-Glial Tumors: Faltam 309 arquivos
+Mesenchymal (Non-Meningothelial Tumors): Faltam 332 arquivos
+Eu abri algumas e vi que tem imagens sem a segmentação e sem o json
+
+■ Verifique valores inconsistentes, por exemplo: dimensões de imagens
+fora do esperado.
+x
+○ Qualidade das Imagens
+■ Identifique imagens corrompidas que não podem ser abertas ou
+processadas.
+x
+○ Distribuição das Classes
+■ Verifique a distribuição das classes para identificar possíveis
+desequilíbrios que possam afetar a modelagem.
+
+Normal: 4.788
+Nerve Sheath Tumors: 4.914
+Mixed Neuronal and Neuronal-Glial Tumors (Tumor Neuroepitelial Disembrioplásico, Ganglioglioma, Neurocitoma): 3.195 
+Mesenchymal (Non-Meningothelial Tumors): 2120
+Meningothelial Tumors: 9.065 
+Gliomas (Astrocitoma, Glioblastoma, Ependimoma, Oligodendroglioma): 20800
+Germ Cell Tumors: 1046
+Embryonic Tumors: 3522
+Cada um com três tipos de tomografia: dados anatômicos (T1), a vascularização tumoral (T1C+) e a extensão do edema (T2). E 4 arquivos para cada imagem (1 total, 1 demarcação, 1 segmentação e 1 json)
+
+○ Duplicatas
+■ Identifique imagens duplicadas que possam enviesar os resultados.
+x
+■ Verifique duplicatas no arquivo de informações.
+x
+● Informações complementares
+○ Elaborar uma apresentação para mostrar os resultados.
+○ Apresentar o dataset de forma detalhada.
+○ Verifique quais itens em Informações esperadas podem ser aplicados no
+dataset.
