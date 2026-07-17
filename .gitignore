@@ -1,5 +1,6 @@
 *.dat
 Dados/
+relatorio_qualidade_dataset.txt
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
